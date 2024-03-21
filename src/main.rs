@@ -1,15 +1,4 @@
 #[macro_use] extern crate rocket;
-enum ApiUrl {
-    GetNotificationsByUserId(String),
-    DeleteNotificationById(String)
-}
-
-fn get_api_url(get_url: ApiUrl) -> String {
-    match get_url {
-        ApiUrl::GetNotificationsByUserId(_) => "/api/v1/notification/<user_id>".to_owned(),
-        ApiUrl::DeleteNotificationById(_) => "/api/v1/notification/delete/<user_id>".to_owned()
-    }
-}
 
 
 #[get("/api/v1/notification/<user_id>")]
