@@ -1,18 +1,10 @@
-#[macro_use] extern crate rocket;
-
-
-#[get("/api/v1/notification/<user_id>")]
-fn getNotificationsByUserId(user_id: &str) -> String {
-    format!("Hello, {}!", user_id)
-}
-
-#[get("/api/v1/notification")]
-fn index() -> &'static str {
-    "Hello, world!"
-}
+extern crate notification;
+#[macro_use]
+extern crate rocket;
 
 #[launch]
 fn rocket() -> _ {
+    use notification::notification_controller::{get_notifications_by_user_id, index};
     // Configures and launches the Rocket web server.
-    rocket::build().mount("/", routes![index, getNotificationsByUserId])
+    rocket::build().mount("/", routes![index, get_notifications_by_user_id])
 }

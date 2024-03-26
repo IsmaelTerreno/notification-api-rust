@@ -1,0 +1,44 @@
+version: '3.7'
+services:
+  notification-api-lab-rust:
+    image: notification-api-lab-rust:latest
+    env_file:
+      - docker.env
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+      args:
+        HOST_DB_CONFIG: ${HOST_DB_CONFIG}
+        PORT_DB_CONFIG: ${PORT_DB_CONFIG}
+        DIALECT_DB_CONFIG: ${DIALECT_DB_CONFIG}
+        PROTOCOL_DB_CONFIG: ${PROTOCOL_DB_CONFIG}
+        DATABASE_NAME_DB_CONFIG: ${DATABASE_NAME_DB_CONFIG}
+        LOG_DEBUG_DB_CONFIG: ${LOG_DEBUG_DB_CONFIG}
+        USER_NAME_DB_CONFIG: ${USER_NAME_DB_CONFIG}
+        USER_PASSWORD_DB_CONFIG: ${USER_PASSWORD_DB_CONFIG}
+    restart: always
+    ports:
+      - '8000:8000'
+    volumes:
+      - ./notification-api-data:/notification-api
+    depends_on:
+      - notification-api-postgres
+    networks:
+      - notification-api-network
+
+  notification-api-postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=notification-api
+    ports:
+      - '5496:5432'
+    volumes:
+      - ./notification-api-postgres-data:/var/lib/postgresql/data
+    networks:
+      - notification-api-network
+
+networks:
+  notification-api-network:
