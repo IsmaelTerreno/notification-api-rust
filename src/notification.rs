@@ -5,3 +5,5 @@ pub mod notification_controller;
 pub mod notification_service;
 pub mod notification_repository;
 pub mod schema;
+pub mod models;
+pub mod database;
