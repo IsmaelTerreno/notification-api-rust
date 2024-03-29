@@ -6,5 +6,6 @@ diesel::table! {
         topic -> Varchar,
         body -> Text,
         read -> Bool,
+        user_id -> Nullable<Varchar>,
     }
 }

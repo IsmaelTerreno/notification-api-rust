@@ -10,4 +10,5 @@ pub struct Notification {
     pub topic: String,
     pub body: String,
     pub read: bool,
+    pub user_id: String,
 }
