@@ -1,7 +1,8 @@
 use crate::database::establish_connection;
 use crate::models::Notification;
 
-pub fn find_by_user_id(user_id: &str) -> String {
+/// Find all the notifications by user id in the database.
+pub fn find_by_user_id(id_search: &str) -> String {
     use crate::schema::notification::dsl::*;
     use diesel::prelude::*;
     let connection = &mut establish_connection();
@@ -11,13 +12,13 @@ pub fn find_by_user_id(user_id: &str) -> String {
         .load(connection)
         .expect("Error loading notifications by user id.");
     println!("User id: {:?}", results);
-    user_id.to_owned()
+    id_search.to_string()
 }
+
+/// Creates a new notification for a user id.
+pub fn create() {}
 
 pub fn update() {
     println!("Hi now.");
 }
 
-pub fn create() {
-    println!("Hi later.")
-}
