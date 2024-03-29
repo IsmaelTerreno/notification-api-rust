@@ -5,7 +5,7 @@ mod test {
 
     #[test]
     fn should_get_notification_by_user_id() {
-        use super::super::rocket;
+        use crate::rocket;
         let client = Client::tracked(rocket()).expect("valid rocket instance");
         let response = client.get(uri!("/api/v1/notification/user/XXX01")).dispatch();
         assert_eq!(response.status(), Status::Ok);
