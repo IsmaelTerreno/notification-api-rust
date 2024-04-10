@@ -9,6 +9,6 @@ mod test {
         let client = Client::tracked(rocket()).expect("valid rocket instance");
         let response = client.get(uri!("/api/v1/notification/user/XXX01")).dispatch();
         assert_eq!(response.status(), Status::Ok);
-        assert_eq!(response.into_string().unwrap(), "XXX01");
+        assert_eq!(response.into_string().unwrap(), "[]");
     }
 }
